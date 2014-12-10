@@ -2,44 +2,7 @@ package cs.createfile;
 
 import java.io.File;
 import java.io.FileOutputStream;
-
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFTable;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFRun;
-import org.apache.poi.xwpf.usermodel.XWPFTable;
-
-import cs.parser.DBFiledInfo;
-import cs.parser.SAX;
-
-
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFColor;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream.GetField;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -54,6 +17,9 @@ public class CreateExcel {
 	public static void createExcelFile(String content, String path)
 			throws Exception {
 		try {
+			int a;
+			int b;
+			
 			DBFiledInfo dbfiledinfo = (DBFiledInfo) new DBFiledInfo();
 			SAX saxObj = new SAX(dbfiledinfo);
 			saxObj.read("C://Data.xml");
@@ -110,10 +76,18 @@ public class CreateExcel {
 				cell7.setCellValue(saxObj.getData7[i]);
 
 			}
-			for(int i=0; i<350; i++){
-				worksheet.autoSizeColumn((short)i);
-				worksheet.setColumnWidth(i, (worksheet.getColumnWidth(i))+612 );  // 윗줄만으로는 컬럼의 width 가 부족하여 더 늘려야 함.
-				}
+			for (int i = 0; i < 350; i++) {
+				worksheet.autoSizeColumn((short) i);
+				worksheet
+						.setColumnWidth(i, (worksheet.getColumnWidth(i)) + 612); // 윗줄만으로는
+																					// 컬럼의
+																					// width
+																					// 가
+																					// 부족하여
+																					// 더
+																					// 늘려야
+																					// 함.
+			}
 
 			wb.write(fos);
 			fos.close();

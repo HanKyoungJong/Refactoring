@@ -19,7 +19,7 @@ public class CreateExcel {
 		try {
 			int a;
 			int b;
-			
+			int c;
 			DBFiledInfo dbfiledinfo = (DBFiledInfo) new DBFiledInfo();
 			SAX saxObj = new SAX(dbfiledinfo);
 			saxObj.read("C://Data.xml");

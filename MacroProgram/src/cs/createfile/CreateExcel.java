@@ -2,7 +2,6 @@ package cs.createfile;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -12,14 +11,16 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import cs.parser.DBFiledInfo;
 import cs.parser.SAX;
 
+import java.io.IOException;
+
 public class CreateExcel {
+	static XSSFCell cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8;
+	static XSSFRow row1;
+	static XSSFSheet worksheet;
 
 	public static void createExcelFile(String content, String path)
 			throws Exception {
 		try {
-			int a;
-			int b;
-			int c;
 			DBFiledInfo dbfiledinfo = (DBFiledInfo) new DBFiledInfo();
 			SAX saxObj = new SAX(dbfiledinfo);
 			saxObj.read("C://Data.xml");
@@ -27,66 +28,37 @@ public class CreateExcel {
 
 			FileOutputStream fos = new FileOutputStream(path);
 			XSSFWorkbook wb = new XSSFWorkbook();
-			XSSFSheet worksheet = wb.createSheet();
-			XSSFRow row1 = worksheet.createRow(0);
-			for (int i = 0; i < 8; i++) {
-				XSSFCell cell1 = row1.createCell(i);
-				cell1.setCellValue(saxObj.getData1[i]);
-			}
+			worksheet = wb.createSheet();
 
-			XSSFRow row2 = worksheet.createRow(1);
-			for (int i = 0; i < 350; i++) {
+			// 수정후 코드
 
-				XSSFCell cell2 = row2.createCell(i);
-				cell2.setCellValue(saxObj.getData2[i]);
+			createCell(0, 8, cell1, saxObj.getData1);
+			// 엑셀 1번째 열에 getData1[tableName 데이터값] 을 넣겠다, 여기 350은 데이터 갯수
 
-			}
-			XSSFRow row3 = worksheet.createRow(2);
-			for (int i = 0; i < 350; i++) {
+			createCell(1, 350, cell2, saxObj.getData2);
+			// 엑셀 2번째 열에 getData2[logicalName 데이터값] 을 넣겠다, 여기 350은데이터 갯수
 
-				XSSFCell cell3 = row3.createCell(i);
-				cell3.setCellValue(saxObj.getData3[i]);
+			createCell(2, 350, cell3, saxObj.getData3);
+			// 엑셀 3번째 열에 getData3[columnName 데이터값] 을 넣겠다, 여기 350은 데이터 갯수
 
-			}
-			XSSFRow row4 = worksheet.createRow(3);
-			for (int i = 0; i < 350; i++) {
+			createCell(3, 350, cell4, saxObj.getData4);
+			// 엑셀 4번째 열에 getData4[name 데이터값] 을 넣겠다, 여기 350은 데이터 갯수
 
-				XSSFCell cell4 = row4.createCell(i);
-				cell4.setCellValue(saxObj.getData4[i]);
+			createCell(4, 350, cell5, saxObj.getData5);
+			// 엑셀 5번째 열에 getData5[sizeName 데이터값] 을 넣겠다, 여기 350은 데이터 갯수
 
-			}
-			XSSFRow row5 = worksheet.createRow(4);
-			for (int i = 0; i < 350; i++) {
+			createCell(5, 350, cell6, saxObj.getData6);
+			// 엑셀 6번째 열에 getData6[notNullName 데이터값] 을 넣겠다, 여기 350은 데이터 갯수
 
-				XSSFCell cell5 = row5.createCell(i);
-				cell5.setCellValue(saxObj.getData5[i]);
+			createCell(6, 350, cell7, saxObj.getData7);
+			// 엑셀 7번째 열에 getData7[primaryKeyName 데이터값] 을 넣겠다, 여기 350은 데이터 갯수
 
-			}
-			XSSFRow row6 = worksheet.createRow(5);
-			for (int i = 0; i < 350; i++) {
-
-				XSSFCell cell6 = row6.createCell(i);
-				cell6.setCellValue(saxObj.getData6[i]);
-
-			}
-			XSSFRow row7 = worksheet.createRow(6);
-			for (int i = 0; i < 350; i++) {
-
-				XSSFCell cell7 = row7.createCell(i);
-				cell7.setCellValue(saxObj.getData7[i]);
-
-			}
 			for (int i = 0; i < 350; i++) {
 				worksheet.autoSizeColumn((short) i);
 				worksheet
-						.setColumnWidth(i, (worksheet.getColumnWidth(i)) + 612); // 윗줄만으로는
-																					// 컬럼의
-																					// width
-																					// 가
-																					// 부족하여
-																					// 더
-																					// 늘려야
-																					// 함.
+						.setColumnWidth(i, (worksheet.getColumnWidth(i)) + 612);
+
+				// 윗줄만으로는 컬럼의 width가 부족하여 더 늘려야함
 			}
 
 			wb.write(fos);
@@ -97,4 +69,23 @@ public class CreateExcel {
 			e.printStackTrace();
 		}
 	}
+
+	// 변수 createRow는 열을 만드는 변수, dataSize는 getData들의 데이터 갯수, createCell은 몇번째 열을
+	// 만드는 변수
+	// 만드는 변수
+	// getData는 tablename,logicalname 등의 변수
+
+	public static void createCell(int createRow, int dataSize,
+			XSSFCell createCell, String[] getData) {
+
+		int i;
+		row1 = worksheet.createRow(createRow);
+		for (i = 0; i < dataSize; i++) {
+			createCell = row1.createCell(i);
+			createCell.setCellValue(getData[i]);
+
+		}
+
+	}
+
 }

@@ -14,9 +14,9 @@ import cs.parser.SAX;
 import java.io.IOException;
 
 public class CreateExcel {
-	static XSSFCell cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8;
-	static XSSFRow row1;
-	static XSSFSheet worksheet;
+	private static XSSFCell cell1, cell2, cell3, cell4, cell5, cell6, cell7;
+	private static XSSFRow row1;
+	private static XSSFSheet worksheet;
 
 	public static void createExcelFile(String content, String path)
 			throws Exception {
@@ -72,15 +72,13 @@ public class CreateExcel {
 
 	// 변수 createRow는 열을 만드는 변수, dataSize는 getData들의 데이터 갯수, createCell은 몇번째 열을
 	// 만드는 변수
-	// 만드는 변수
 	// getData는 tablename,logicalname 등의 변수
 
 	public static void createCell(int createRow, int dataSize,
 			XSSFCell createCell, String[] getData) {
 
-		int i;
 		row1 = worksheet.createRow(createRow);
-		for (i = 0; i < dataSize; i++) {
+		for (int i = 0; i < dataSize; i++) {
 			createCell = row1.createCell(i);
 			createCell.setCellValue(getData[i]);
 

@@ -42,22 +42,32 @@ public class PDFCreater {
 			doc = new Document();
 			PdfWriter.getInstance(doc, fos);
 			doc.open();
-			PDFTitleAndMakeUpCreater();
+			
+			PDFTitleAndMakeUpCreater("PDF", "Test PDF", "Java Test",
+					"Sample PDF", "DBinfo", "Test DBInfo");
 			// PDF 제목 꾸미는 메소드
+			
 			PDFOneTableAndCellCreater(1, saxObj.getData1);
 			// PDF 1번째 테이블(차트)을 만들어 getData1(tablename)의 값을 차트안에 넣는 메소드
+
 			PDFTwoTableAndCellCreater(1, 250, saxObj.getData2);
 			// PDF 2번째 테이블(차트)을 만들어 getData1(logicalName)의 값을 차트안에 넣는 메소드
+
 			PDFTwoTableAndCellCreater(1, 250, saxObj.getData3);
 			// PDF 3번째 테이블(차트)을 만들어 getData1(columnName)의 값을 차트안에 넣는 메소드
+
 			PDFTwoTableAndCellCreater(1, 250, saxObj.getData4);
 			// PDF 4번째 테이블(차트)을 만들어 getData1(name)의 값을 차트안에 넣는 메소드
+
 			PDFTwoTableAndCellCreater(1, 250, saxObj.getData5);
 			// PDF 5번째 테이블(차트)을 만들어 getData1(sizeName)의 값을 차트안에 넣는 메소드
+
 			PDFTwoTableAndCellCreater(1, 250, saxObj.getData6);
 			// PDF 6번째 테이블(차트)을 만들어 getData1(notNullName)의 값을 차트안에 넣는 메소드
+
 			PDFTwoTableAndCellCreater(1, 250, saxObj.getData7);
 			// PDF 7번째 테이블(차트)을 만들어 getData1(primaryKeyName)의 값을 차트안에 넣는 메소드
+
 			doc.close();
 
 			System.out.println(file.getAbsolutePath()
@@ -70,22 +80,23 @@ public class PDFCreater {
 	}
 
 	// PDF 제목 꾸미는 메소드
-	private void PDFTitleAndMakeUpCreater() throws DocumentException {
-		doc.add(new Paragraph("PDF"));
+	private void PDFTitleAndMakeUpCreater(String a, String b, String c,
+			String d, String e, String f) throws DocumentException {
+		doc.add(new Paragraph(a));
 		doc.add(new Paragraph(new Date().toString()));
 
-		doc.addAuthor("Test PDF");
+		doc.addAuthor(b);
 		doc.addCreationDate();
-		doc.addCreator("Java Test");
-		doc.addTitle("Sample PDF");
+		doc.addCreator(c);
+		doc.addTitle(d);
 
 		// Create Paragraph
-		Paragraph paragraph = new Paragraph("DBInfo", new Font(
+		Paragraph paragraph = new Paragraph(e, new Font(
 				Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD));
 
 		// New line
 		paragraph.add(new Paragraph(" "));
-		paragraph.add("Test DBInfo");
+		paragraph.add(f);
 		paragraph.add(new Paragraph(" "));
 
 		doc.add(paragraph);

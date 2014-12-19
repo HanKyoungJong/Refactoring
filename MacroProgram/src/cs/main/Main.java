@@ -1,9 +1,5 @@
 package cs.main;
 
-import cs.createfile.CreateExcel;
-import cs.createfile.CreatePDF;
-import cs.createfile.CreateWord;
-
 public class Main {
 
 	@SuppressWarnings("static-access")

@@ -98,19 +98,7 @@ class GUI extends JFrame implements ActionListener {
 
 	}
 
-	private void showMessage(String showMessage, String showLoding) {
-
-		JOptionPane.showMessageDialog(this, showMessage, showLoding,
-				JOptionPane.INFORMATION_MESSAGE);
-
-	}
-
-	private void setTextFileRoute(String fileRoute) {
-
-		jf.setText(fileRoute);
-
-	}
-
+	// 버튼클릭하였을때 엑셀파일 실행하는 메소드
 	private void ExcelImpleMented() {
 		ExcelCreater ce = new ExcelCreater("", "D://DBinfo/info1.xlsx");
 		showMessage("잠시만기다려주세요.", "Loding");
@@ -124,6 +112,7 @@ class GUI extends JFrame implements ActionListener {
 
 	}
 
+	// 버튼클릭하였을때 워드파일 실행하는 메소드
 	private void WordImpleMented() {
 		WordCreater cd = new WordCreater("", "D://DBinfo/info1.docx");
 		showMessage("잠시만기다려주세요.", "Loding");
@@ -137,6 +126,7 @@ class GUI extends JFrame implements ActionListener {
 
 	}
 
+	// 버튼클릭하였을때 PDF파일 실행하는 메소드
 	private void PDFImpleMented() {
 		PDFCreater cp = new PDFCreater("", "D://DBinfo/info.pdf");
 		showMessage("잠시만기다려주세요.", "Loding");
@@ -147,6 +137,21 @@ class GUI extends JFrame implements ActionListener {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+
+	}
+
+	// GUI에서 메세지보여주는 메소드
+	private void showMessage(String showMessage, String showLoding) {
+
+		JOptionPane.showMessageDialog(this, showMessage, showLoding,
+				JOptionPane.INFORMATION_MESSAGE);
+
+	}
+
+	// GUI에서 파일경로를 표시하고 보여주는 메소드
+	private void setTextFileRoute(String fileRoute) {
+
+		jf.setText(fileRoute);
 
 	}
 

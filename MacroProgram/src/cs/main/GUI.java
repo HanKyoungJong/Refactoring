@@ -13,24 +13,24 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import cs.createfile.CreateExcel;
-import cs.createfile.CreatePDF;
-import cs.createfile.CreateWord;
+import cs.createfile.PDFCreater;
+import cs.createfile.ExcelCreater;
 import cs.createfile.CreateFile;
+import cs.createfile.WordCreater;
 
 @SuppressWarnings("serial")
 class GUI extends JFrame implements ActionListener {
-
-	JButton b1, b2, b3, b4, b5;
+	private JButton b1, b2, b3, b4, b5;
 	JLabel jb;
 	JTextField jf;
 	JTextArea ja;
 	String a, b;
+	JPanel p;
 
 	public GUI() {
 		setTitle("MacroProgram Test");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel p = new JPanel();
+		p = new JPanel();
 
 		p.setLayout(null);
 
@@ -81,47 +81,71 @@ class GUI extends JFrame implements ActionListener {
 	@SuppressWarnings("static-access")
 	public void actionPerformed(ActionEvent e) {
 		JButton s = (JButton) e.getSource();
+
 		if (s == b1) {
-			CreateExcel ce = new CreateExcel();
-			JOptionPane.showMessageDialog(this, "잠시만기다려주세요.", "Loding",
-					JOptionPane.INFORMATION_MESSAGE);
-			try {
-				ce.createExcelFile("", "D://DBinfo/info1.xlsx");
-				jf.setText("D:/DBinfo/info1.xlsx");
-				JOptionPane.showMessageDialog(this, "파일이생성되었습니다.", "completed",
-						JOptionPane.INFORMATION_MESSAGE);
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
+			ExcelImpleMented();
 		} else if (s == b2) {
-			CreateWord cd = new CreateWord();
-			JOptionPane.showMessageDialog(this, "잠시만기다려주세요.", "Loding",
-					JOptionPane.INFORMATION_MESSAGE);
-			try {
-				cd.createWordFile("", "D://DBinfo/info1.docx");
-				JOptionPane.showMessageDialog(this, "파일이생성되었습니다.", "completed",
-						JOptionPane.INFORMATION_MESSAGE);
-				jf.setText("D:/DBinfo/info1.docx");
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
+			WordImpleMented();
 		} else if (s == b3) {
-			CreatePDF cp = new CreatePDF();
-			JOptionPane.showMessageDialog(this, "잠시만기다려주세요.", "Loding",
-					JOptionPane.INFORMATION_MESSAGE);
-			try {
-				cp.createPDFFile("", "D://DBinfo/info.pdf");
-				JOptionPane.showMessageDialog(this, "파일이생성되었습니다.", "completed",
-						JOptionPane.INFORMATION_MESSAGE);
-				jf.setText("D:/DBinfo/info.pdf");
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
+			PDFImpleMented();
+
 		} else if (s == b4) {
 			CreateFile cf = new CreateFile();
 
-			cf.test(a, b);
+			cf.test();
 
+		}
+
+	}
+
+	private void showMessage(String showMessage, String showLoding) {
+
+		JOptionPane.showMessageDialog(this, showMessage, showLoding,
+				JOptionPane.INFORMATION_MESSAGE);
+
+	}
+
+	private void setTextFileRoute(String fileRoute) {
+
+		jf.setText(fileRoute);
+
+	}
+
+	private void ExcelImpleMented() {
+		ExcelCreater ce = new ExcelCreater("", "D://DBinfo/info1.xlsx");
+		showMessage("잠시만기다려주세요.", "Loding");
+		try {
+			ce.createExcelFile();
+			setTextFileRoute("D:/DBinfo/info1.xlsx");
+			showMessage("파일이생성되었습니다.", "completed");
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+
+	}
+
+	private void WordImpleMented() {
+		WordCreater cd = new WordCreater("", "D://DBinfo/info1.docx");
+		showMessage("잠시만기다려주세요.", "Loding");
+		try {
+			cd.createWordFile();
+			setTextFileRoute("D:/DBinfo/info1.docx");
+			showMessage("파일이생성되었습니다.", "completed");
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+
+	}
+
+	private void PDFImpleMented() {
+		PDFCreater cp = new PDFCreater("", "D://DBinfo/info.pdf");
+		showMessage("잠시만기다려주세요.", "Loding");
+		try {
+			cp.createPDFFile();
+			setTextFileRoute("D:/DBinfo/info.pdf");
+			showMessage("파일이생성되었습니다.", "completed");
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
 
 	}
